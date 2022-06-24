@@ -1,5 +1,4 @@
 //SPDX-License-Identifier: MIT
-//🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿🧿
 
 pragma solidity ^0.8.0;
 
@@ -12,8 +11,6 @@ address constant DEV_KASASI = 0x333Bc913264B6E4a10fd38F30264Ff9c9801176D;
 address payable constant DAO_KASASI = payable(
     0x11bf105d4DFa49236dBee765fc80387EAc1eC722
 );
-
-address constant DAO_KASASI_VO = 0xAd3150f826FaA9bFB3A0Ca6a307D3E8EAd07B463;
 
 address constant THRESHOLD_2OF2_EXPOSURE_LIST_WRITER = 0xCD2eD882620A6A3Aa90E65AF4C6ae2298336E305;
 
