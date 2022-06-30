@@ -3,8 +3,11 @@
 pragma solidity ^0.8.0;
 
 import "./IERC20Permit.sol";
+import {TCKO_ADDR} from "./Addresses.sol";
 
 IERC20 constant TRYB = IERC20(0x564A341Df6C126f90cf3ECB92120FD7190ACb401);
+
+IERC20Permit constant TCKO = IERC20Permit(TCKO_ADDR);
 
 IERC20Permit constant USDC = IERC20Permit(
     0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E
