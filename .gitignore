@@ -1,2 +1,3 @@
+*.keys
 cache/
 out/

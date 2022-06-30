@@ -1,3 +1,2 @@
 [default]
 src = 'contracts'
-libs = ['lib']
