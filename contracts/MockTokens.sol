@@ -4,21 +4,24 @@ pragma solidity 0.8.15;
 
 import "./IERC20Permit.sol";
 
+uint64 constant USDT_DEPLOY_N = 2;
+address constant USDT_DEPLOYER = 0x503560430E4b5814Dda09Ac789C3508Bb41b24B2;
+
 /**
  * @title Mock of the tokens we accepts as payment for testing purposes.
  */
 contract MockERC20Permit is IERC20Permit {
-    string public override name;
-    string public override symbol;
-    uint8 public immutable decimals;
-    uint256 public override totalSupply;
-    mapping(address => uint256) public override balanceOf;
-    mapping(address => mapping(address => uint256)) public override allowance;
-
     // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH =
         0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
     bytes32 public immutable override DOMAIN_SEPARATOR;
+    uint8 public immutable override decimals;
+
+    string public override name;
+    string public override symbol;
+    uint256 public override totalSupply;
+    mapping(address => uint256) public override balanceOf;
+    mapping(address => mapping(address => uint256)) public override allowance;
     mapping(address => uint256) public override nonces;
 
     constructor(
