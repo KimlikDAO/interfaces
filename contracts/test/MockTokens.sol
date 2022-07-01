@@ -2,10 +2,34 @@
 
 pragma solidity 0.8.15;
 
-import "./IERC20Permit.sol";
+import "../IERC20Permit.sol";
+import "forge-std/console2.sol";
+import "forge-std/Vm.sol";
 
-uint64 constant USDT_DEPLOY_N = 2;
 address constant USDT_DEPLOYER = 0x503560430E4b5814Dda09Ac789C3508Bb41b24B2;
+address constant USDC_DEPLOYER = 0xcb9968Cb0d6612e1167e445774997C63a0792dbF;
+address constant TRYB_DEPLOYER = 0xEE34DcaF2f48F3158Ef0BE8d0A2D37078cC9729b;
+
+function DeployMockTokens() {
+    Vm vm = Vm(
+        address(bytes20(uint160(uint256(keccak256("hevm cheat code")))))
+    );
+
+    vm.setNonce(USDT_DEPLOYER, 2);
+    vm.prank(USDT_DEPLOYER);
+    IERC20Permit usdt = new MockERC20Permit("USDt", "TetherToken", 6);
+    console2.log("USDT:", address(usdt));
+
+    vm.setNonce(USDC_DEPLOYER, 4);
+    vm.prank(USDC_DEPLOYER);
+    IERC20Permit usdc = new MockERC20Permit("USDC", "USD Coin", 6);
+    console2.log("USDC:", address(usdc));
+
+    vm.setNonce(TRYB_DEPLOYER, 2);
+    vm.prank(TRYB_DEPLOYER);
+    IERC20Permit tryb = new MockERC20Permit("TRYB", "BiLira", 6);
+    console2.log("TRYB:", address(tryb));
+}
 
 /**
  * @title Mock of the tokens we accepts as payment for testing purposes.
