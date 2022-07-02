@@ -62,8 +62,8 @@ contract MockERC20Permit is IERC20Permit {
         symbol = tokenSymbol;
         decimals = tokenDecimals;
         uint256 toMint = 100 * 10**decimals;
-        balanceOf[msg.sender] += toMint;
-        totalSupply += toMint;
+        balanceOf[msg.sender] = toMint;
+        totalSupply = toMint;
 
         emit Transfer(address(this), msg.sender, toMint);
         DOMAIN_SEPARATOR = keccak256(
@@ -71,7 +71,7 @@ contract MockERC20Permit is IERC20Permit {
                 keccak256(
                     "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
                 ),
-                keccak256(bytes(symbol)),
+                keccak256(bytes(tokenSymbol)),
                 keccak256(bytes("1")),
                 block.chainid,
                 address(this)
