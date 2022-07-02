@@ -10,6 +10,7 @@ address constant FRAX_DEPLOYER = 0x660a09B101Bb0d21be056f8Ae6A72775b89dB5D8;
 address constant TRYB_DEPLOYER = 0xEE34DcaF2f48F3158Ef0BE8d0A2D37078cC9729b;
 address constant USDC_DEPLOYER = 0xcb9968Cb0d6612e1167e445774997C63a0792dbF;
 address constant USDT_DEPLOYER = 0x503560430E4b5814Dda09Ac789C3508Bb41b24B2;
+address constant YUSD_DEPLOYER = 0x92294AC145C3Df4B4234661D68F3b8D89f84A488;
 
 function DeployMockTokens() {
     Vm vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
@@ -33,6 +34,11 @@ function DeployMockTokens() {
     vm.prank(USDT_DEPLOYER);
     IERC20Permit usdt = new MockERC20Permit("USDt", "TetherToken", 6);
     console2.log("USDT:", address(usdt));
+
+    vm.setNonce(YUSD_DEPLOYER, 0);
+    vm.prank(YUSD_DEPLOYER);
+    IERC20Permit yusd = new MockERC20Permit("YUSD", "YUSD Stablecoin", 18);
+    console2.log("YUSD:", address(yusd));
 }
 
 /**
