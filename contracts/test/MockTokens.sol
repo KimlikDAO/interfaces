@@ -35,7 +35,6 @@ function DeployMockTokens() {
     IERC20Permit usdt = new MockERC20Permit("USDt", "TetherToken", 6);
     console2.log("USDT:", address(usdt));
 
-    vm.setNonce(YUSD_DEPLOYER, 0);
     vm.prank(YUSD_DEPLOYER);
     IERC20Permit yusd = new MockERC20Permit("YUSD", "YUSD Stablecoin", 18);
     console2.log("YUSD:", address(yusd));
