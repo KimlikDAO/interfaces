@@ -18,5 +18,5 @@ interface IDAOKasasi {
 
     function versionHash() external pure returns (bytes32);
 
-    function migrateToCode(address codeAddress) external;
+    function migrateToCode(IDAOKasasi codeAddress) external;
 }
