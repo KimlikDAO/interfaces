@@ -27,5 +27,5 @@ contract MockDAOKasasi is IDAOKasasi {
         return 0;
     }
 
-    function migrateToCode(address) external {}
+    function migrateToCode(IDAOKasasi) external {}
 }
