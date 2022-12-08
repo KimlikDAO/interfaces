@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 
@@ -11,16 +11,19 @@ contract Dummy {}
 
 contract AddressesTest is Test {
     function testDeployerConsistency() public {
+        // DAO_KASASI
         vm.prank(DAO_KASASI_DEPLOYER);
         IDAOKasasi daoKasasi = new MockDAOKasasi();
 
         assertEq(address(daoKasasi), DAO_KASASI);
 
+        // OYLAMA
         vm.prank(OYLAMA_DEPLOYER);
         Dummy oylama = new Dummy();
 
         assertEq(address(oylama), OYLAMA);
 
+        // TCKO
         vm.startPrank(TCKO_DEPLOYER);
         Dummy tcko = new Dummy();
         Dummy tckok = new Dummy();
@@ -29,6 +32,7 @@ contract AddressesTest is Test {
         assertEq(address(tcko), TCKO_ADDR);
         assertEq(address(tckok), TCKOK);
 
+        // TCKT
         vm.prank(TCKT_DEPLOYER);
         Dummy tckt = new Dummy();
 

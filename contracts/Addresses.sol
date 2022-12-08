@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
 
@@ -18,7 +18,6 @@ address constant OYLAMA = 0xcCc0006DC0F2967dbFF436CF27A5E6922DFeBcCc;
 address constant OYLAMA_DEPLOYER = 0x04E8F0835255814053dE222Af00900A0821aE01E;
 
 // TCKT addresses
-address constant TCKT_2OF2_EXPOSURE_REPORTER = 0xDde6851A28df929fBb9419eDeeF8F91fA5974a4c;
 address constant TCKT_ADDR = 0xcCc09283659A0aa5E14CFFCA10B3931792d50cCc;
 address constant TCKT_DEPLOYER = 0xF045E3e133939637969C2D80d69aff076dE04e02;
 
