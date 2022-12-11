@@ -35,7 +35,10 @@ contract AddressesTest is Test {
         // TCKT
         vm.prank(TCKT_DEPLOYER);
         Dummy tckt = new Dummy();
+        vm.prank(TCKT_SIGNERS_DEPLOYER);
+        Dummy tcktSigners = new Dummy();
 
         assertEq(address(tckt), TCKT_ADDR);
+        assertEq(address(tcktSigners), TCKT_SIGNERS);
     }
 }
