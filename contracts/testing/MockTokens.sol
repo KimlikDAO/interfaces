@@ -148,4 +148,8 @@ contract MockERC20Permit is IERC20Permit {
         allowance[owner][spender] = amount;
         emit Approval(owner, spender, amount);
     }
+
+    function mint(uint256 amount) external {
+        balanceOf[msg.sender] += amount;
+    }
 }
