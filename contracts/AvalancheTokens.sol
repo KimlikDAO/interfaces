@@ -34,3 +34,7 @@ IERC20Permit constant USDT = IERC20Permit(
 IERC20Permit constant YUSD = IERC20Permit(
     0x111111111111ed1D73f860F57b2798b683f2d325
 );
+
+IERC20Permit constant BUSD = IERC20Permit(
+    0x9C9e5fD8bbc25984B178FdCE6117Defa39d2db39
+);

@@ -11,6 +11,7 @@ address constant TRYB_DEPLOYER = 0xEE34DcaF2f48F3158Ef0BE8d0A2D37078cC9729b;
 address constant USDC_DEPLOYER = 0xcb9968Cb0d6612e1167e445774997C63a0792dbF;
 address constant USDT_DEPLOYER = 0x503560430E4b5814Dda09Ac789C3508Bb41b24B2;
 address constant YUSD_DEPLOYER = 0x92294AC145C3Df4B4234661D68F3b8D89f84A488;
+address constant BUSD_DEPLOYER = 0xf537880c505BfA7cdA6c8c49D7efa53D45b52D40;
 
 function DeployMockTokens() {
     Vm vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
@@ -38,6 +39,11 @@ function DeployMockTokens() {
     vm.prank(YUSD_DEPLOYER);
     IERC20Permit yusd = new MockERC20Permit("YUSD", "YUSD Stablecoin", 18);
     console2.log("YUSD:", address(yusd));
+
+    vm.setNonce(BUSD_DEPLOYER, 2);
+    vm.prank(BUSD_DEPLOYER);
+    IERC20Permit busd = new MockERC20Permit("BUSD", "BUSD Token", 18);
+    console2.log("BUSD:", address(busd));
 }
 
 /**
