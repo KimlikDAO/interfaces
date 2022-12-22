@@ -14,8 +14,8 @@ address payable constant DAO_KASASI = payable(
 address constant DAO_KASASI_DEPLOYER = 0x0DabB96F2320A170ac0dDc985d105913D937ea9A;
 
 // OYLAMA addresses
-address constant OYLAMA = 0xcCc0c4e5d57d251551575CEd12Aba80B43fF1cCc;
-address constant OYLAMA_DEPLOYER = 0x2EF1308e8641a20b509DC90d0568b96359498BBa;
+address constant OYLAMA = 0xcCc0AC04C9251B74b0b30A20Fc7cb26EB62B0cCc;
+address constant OYLAMA_DEPLOYER = 0xe7671eb60A45c905387df2b19A3803c6Be0Eb8f9;
 
 // TCKT addresses
 address constant TCKT_ADDR = 0xcCc0a9b023177549fcf26c947edb5bfD9B230cCc;
