@@ -2,7 +2,11 @@
 
 pragma solidity ^0.8.0;
 
+uint256 constant END_TS_OFFSET = 112;
+
 uint256 constant END_TS_MASK = uint256(type(uint64).max) << 112;
+
+uint256 constant WITHDRAW_OFFSET = 176;
 
 uint256 constant WITHDRAW_MASK = uint256(type(uint48).max) << 176;
 
