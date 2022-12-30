@@ -8,15 +8,12 @@ import "forge-std/console.sol";
 contract MockDAOKasasi is IDAOKasasi {
     function redeem(
         address payable redeemer,
-        uint256 burnedTokens,
-        uint256 totalTokens
-    ) external view {
-        console.log(
-            "MockDAOKasasi.redeem()",
-            redeemer,
-            burnedTokens,
-            totalTokens
-        );
+        uint256 amount,
+        uint256 totalSupply
+    ) external {
+        console.log("MockDAOKasasi.redeem()", redeemer, amount, totalSupply);
+        uint256 toSendNative = (address(this).balance * amount) / totalSupply;
+        if (toSendNative > 0) redeemer.transfer(toSendNative);
     }
 
     function distroStageUpdated(DistroStage stage) external view {
