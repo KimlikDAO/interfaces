@@ -6,13 +6,14 @@ import "../IDAOKasasi.sol";
 import "forge-std/console.sol";
 
 contract MockDAOKasasi is IDAOKasasi {
-    function redeem(
-        address payable redeemer,
-        uint256 amount,
-        uint256 totalSupply
-    ) external {
-        console.log("MockDAOKasasi.redeem()", redeemer, amount, totalSupply);
-        uint256 toSendNative = (address(this).balance * amount) / totalSupply;
+    function redeem(uint256 amountSupplyRedeemer) external {
+        uint256 amount = amountSupplyRedeemer >> 208;
+        uint256 supply = uint48(amountSupplyRedeemer >> 160);
+        address payable redeemer = payable(
+            address(uint160(amountSupplyRedeemer))
+        );
+        console.log("MockDAOKasasi.redeem()", redeemer, amount, supply);
+        uint256 toSendNative = (address(this).balance * amount) / supply;
         if (toSendNative > 0) redeemer.transfer(toSendNative);
     }
 
