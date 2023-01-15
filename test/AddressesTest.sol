@@ -24,12 +24,14 @@ contract AddressesTest is Test {
         assertEq(address(oylama), OYLAMA);
 
         // TCKO
-        vm.startPrank(TCKO_DEPLOYER);
+        vm.prank(TCKO_DEPLOYER);
         Dummy tcko = new Dummy();
-        Dummy tckok = new Dummy();
-        vm.stopPrank();
 
         assertEq(address(tcko), TCKO_ADDR);
+
+        vm.prank(TCKOK_DEPLOYER);
+        Dummy tckok = new Dummy();
+
         assertEq(address(tckok), TCKOK);
 
         // TCKT
