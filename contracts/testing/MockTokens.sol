@@ -65,8 +65,8 @@ contract MockERC20Permit is IERC20Permit {
     mapping(address => uint256) public override nonces;
 
     constructor(
-        string memory tokenName,
         string memory tokenSymbol,
+        string memory tokenName,
         uint8 tokenDecimals
     ) {
         name = tokenName;
@@ -84,7 +84,7 @@ contract MockERC20Permit is IERC20Permit {
                 ),
                 keccak256(bytes(tokenSymbol)),
                 keccak256(bytes("1")),
-                block.chainid,
+                43114,
                 address(this)
             )
         );
