@@ -3,8 +3,6 @@
 pragma solidity ^0.8.0;
 
 import "contracts/Addresses.sol";
-import "contracts/IDAOKasasi.sol";
-import "contracts/testing/MockDAOKasasi.sol";
 import "forge-std/Test.sol";
 
 contract Dummy {}
@@ -13,7 +11,7 @@ contract AddressesTest is Test {
     function testDeployerConsistency() public {
         // DAO_KASASI
         vm.prank(DAO_KASASI_DEPLOYER);
-        IDAOKasasi daoKasasi = new MockDAOKasasi();
+        Dummy daoKasasi = new Dummy();
 
         assertEq(address(daoKasasi), DAO_KASASI);
 

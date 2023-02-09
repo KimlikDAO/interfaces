@@ -2,28 +2,37 @@
 
 pragma solidity ^0.8.0;
 
-import "../IDAOKasasi.sol";
-import "forge-std/console.sol";
+import {CODE_SLOT} from "../ERC1967.sol";
 
-contract MockDAOKasasi is IDAOKasasi {
-    function redeem(uint256 amountSupplyRedeemer) external {
-        uint256 amount = amountSupplyRedeemer >> 208;
-        uint256 supply = uint48(amountSupplyRedeemer >> 160);
-        address payable redeemer = payable(
-            address(uint160(amountSupplyRedeemer))
-        );
-        console.log("MockDAOKasasi.redeem()", redeemer, amount, supply);
-        uint256 toSendNative = (address(this).balance * amount) / supply;
-        if (toSendNative > 0) redeemer.transfer(toSendNative);
+contract MockDAOKasasi {
+    constructor() {
+        assembly {
+            sstore(CODE_SLOT, 0x4DB9cbE44bF9B747Cd3F3fEfEFbfDb2f2DaA8Cf5)
+        }
     }
 
-    function distroStageUpdated(DistroStage stage) external view {
-        console.log("MockDAOKasasi.distroStageUpdated()", uint256(stage));
-    }
+    receive() external payable {}
 
-    function versionHash() external pure returns (bytes32) {
-        return 0;
+    fallback() external payable {
+        assembly {
+            let codeAddress := sload(CODE_SLOT)
+            calldatacopy(0, 0, calldatasize())
+            let result := delegatecall(
+                gas(),
+                codeAddress,
+                0,
+                calldatasize(),
+                0,
+                0
+            )
+            returndatacopy(0, 0, returndatasize())
+            switch result
+            case 0 {
+                revert(0, returndatasize())
+            }
+            default {
+                return(0, returndatasize())
+            }
+        }
     }
-
-    function migrateToCode(IDAOKasasi) external {}
 }
