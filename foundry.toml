@@ -1,2 +1,6 @@
 [profile.default]
 src = 'contracts'
+solc_version = "0.8.25"
+optimier = true
+optimizer_runs = 20_000
+remappings = ['forge-std/=lib/forge-std/src/']

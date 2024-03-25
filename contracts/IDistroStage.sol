@@ -13,6 +13,6 @@ enum DistroStage {
     FinalUnlock
 }
 
-interface HasDistroStage {
+interface IDistroStage {
     function distroStage() external view returns (DistroStage);
 }

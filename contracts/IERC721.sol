@@ -13,9 +13,5 @@ interface IERC721 {
 
     function supportsInterface(bytes4 interfaceId) external pure returns (bool);
 
-    event Transfer(
-        address indexed from,
-        address indexed to,
-        uint256 indexed tokenId
-    );
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
 }

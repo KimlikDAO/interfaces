@@ -4,41 +4,26 @@ pragma solidity ^0.8.0;
 
 import "contracts/Addresses.sol";
 import "forge-std/Test.sol";
-
-contract Dummy {}
+import {computeCreateAddress as computeEraVMCreateAddress} from "contracts/testing/eravm.sol";
 
 contract AddressesTest is Test {
-    function testDeployerConsistency() public {
-        // DAO_KASASI
-        vm.prank(DAO_KASASI_DEPLOYER);
-        Dummy daoKasasi = new Dummy();
+    function testDeployerConsistency() public pure {
+        assertEq(computeCreateAddress(PROTOCOL_FUND_DEPLOYER, 0), PROTOCOL_FUND);
+        assertEq(computeEraVMCreateAddress(ERAVM_PROTOCOL_FUND_DEPLOYER, 0), ERAVM_PROTOCOL_FUND);
 
-        assertEq(address(daoKasasi), DAO_KASASI);
+        assertEq(computeCreateAddress(KDAO_DEPLOYER, 0), KDAO_ADDR);
+        assertEq(computeEraVMCreateAddress(ERAVM_KDAO_DEPLOYER, 0), ERAVM_KDAO_ADDR);
 
-        // OYLAMA
-        vm.prank(OYLAMA_DEPLOYER);
-        Dummy oylama = new Dummy();
+        assertEq(computeCreateAddress(KDAO_DEPLOYER, 0), KDAO_ADDR);
+        assertEq(computeEraVMCreateAddress(ERAVM_KDAO_DEPLOYER, 0), ERAVM_KDAO_ADDR);
 
-        assertEq(address(oylama), OYLAMA);
+        assertEq(computeCreateAddress(KDAOL_DEPLOYER, 0), KDAOL);
+        assertEq(computeEraVMCreateAddress(ERAVM_KDAOL_DEPLOYER, 0), ERAVM_KDAOL);
 
-        // TCKO
-        vm.prank(TCKO_DEPLOYER);
-        Dummy tcko = new Dummy();
+        assertEq(computeCreateAddress(VOTING_DEPLOYER, 0), VOTING);
+        assertEq(computeEraVMCreateAddress(ERAVM_VOTING_DEPLOYER, 0), ERAVM_VOTING);
 
-        assertEq(address(tcko), TCKO_ADDR);
-
-        vm.prank(TCKOK_DEPLOYER);
-        Dummy tckok = new Dummy();
-
-        assertEq(address(tckok), TCKOK);
-
-        // TCKT
-        vm.prank(TCKT_DEPLOYER);
-        Dummy tckt = new Dummy();
-        vm.prank(TCKT_SIGNERS_DEPLOYER);
-        Dummy tcktSigners = new Dummy();
-
-        assertEq(address(tckt), TCKT_ADDR);
-        assertEq(address(tcktSigners), TCKT_SIGNERS);
+        assertEq(computeCreateAddress(KPASS_SIGNERS_DEPLOYER, 0), KPASS_SIGNERS);
+        assertEq(computeEraVMCreateAddress(ERAVM_KPASS_SIGNERS_DEPLOYER, 0), ERAVM_KPASS_SIGNERS);
     }
 }
