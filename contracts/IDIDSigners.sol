@@ -2,20 +2,22 @@
 
 pragma solidity ^0.8.0;
 
+type uint128x2 is uint256;
+
 struct Signature {
     bytes32 r;
     uint256 yParityAndS;
 }
 
-uint256 constant DEPOSIT_OFFSET = 64;
+uint256 constant SIGNER_INFO_DEPOSIT_OFFSET = 64;
 
-uint256 constant END_TS_OFFSET = 112;
+uint256 constant SIGNER_INFO_END_TS_OFFSET = 112;
 
-uint256 constant END_TS_MASK = uint256(type(uint64).max) << 112;
+uint256 constant SIGNER_INFO_END_TS_MASK = uint256(type(uint64).max) << 112;
 
-uint256 constant WITHDRAW_OFFSET = 176;
+uint256 constant SIGNER_INFO_WITHDRAW_OFFSET = 176;
 
-uint256 constant WITHDRAW_MASK = uint256(type(uint48).max) << 176;
+uint256 constant SIGNER_INFO_WITHDRAW_MASK = uint256(type(uint48).max) << 176;
 
 /**
  *
@@ -24,8 +26,6 @@ uint256 constant WITHDRAW_MASK = uint256(type(uint48).max) << 176;
  * |--   32  --|--    48    --|--   64   --|--   48    --|--   64    --|
  */
 type SignerInfo is uint256;
-
-type uint128x2 is uint256;
 
 interface IDIDSigners {
     function authenticateExposureReportID3Sigs(
