@@ -2,12 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import {setCodeSlot} from "../ERC1967.sol";
-import {DistroStage} from "../IDistroStage.sol";
-import {IProtocolFund} from "../IProtocolFund.sol";
-import {IUpgradable} from "../IUpgradable.sol";
-import {amountAddr} from "../amountAddr.sol";
+import {setCodeSlot} from "erc/ERC1967.sol";
 import {console} from "forge-std/console.sol";
+import {DistroStage} from "kimlikdao/IDistroStage.sol";
+import {IProtocolFund} from "kimlikdao/IProtocolFund.sol";
+import {IUpgradable} from "kimlikdao/IUpgradable.sol";
+import {amountAddr} from "types/amountAddr.sol";
 
 contract MockProtocolFundV1 is IProtocolFund, IUpgradable {
     function redeem(amountAddr aaddr) external override {

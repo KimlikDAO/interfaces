@@ -127,8 +127,5 @@ interface IZkSync {
     ) external view returns (bool);
 }
 
-IZkSync constant ZkSync = IZkSync(0xaBEA9132b05A70803a4E85094fD0e1800777fBEF);
-
-interface IL2Messenger {
-    function sendL2ToL1Log(bool isService, bytes32 key, bytes32 value) external returns (uint256 logIdInMerkleTree);
-}
+address constant ZKSYNC = 0xaBEA9132b05A70803a4E85094fD0e1800777fBEF;
+IZkSync constant ZkSync = IZkSync(ZKSYNC);

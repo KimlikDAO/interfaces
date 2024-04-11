@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import {CODE_SLOT, setCodeSlot} from "../ERC1967.sol";
+import {CODE_SLOT, setCodeSlot} from "erc/ERC1967.sol";
 
 contract MockProtocolFund {
     constructor() {

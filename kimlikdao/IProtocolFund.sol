@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import {PROTOCOL_FUND} from "./addresses.sol";
-import {amountAddr} from "./amountAddr.sol";
+import {PROTOCOL_FUND} from "kimlikdao/addresses.sol";
+import {amountAddr} from "types/amountAddr.sol";
 
 interface IProtocolFund {
     /**

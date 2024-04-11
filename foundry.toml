@@ -3,7 +3,7 @@ sort_imports = true
 single_line_statement_blocks = "single"
 
 [profile.default]
-src = 'contracts'
+test = "./"
 remappings = ['forge-std/=lib/forge-std/src/']
 
 [profile.ethereum]

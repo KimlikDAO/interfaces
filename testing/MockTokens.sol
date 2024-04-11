@@ -2,13 +2,10 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20Permit} from "../IERC20Permit.sol";
+import {TRYB_DEPLOYER, USDC_DEPLOYER, USDT_DEPLOYER} from "avalanche/addresses.sol";
+import {IERC20Permit} from "erc/IERC20Permit.sol";
 import {Vm} from "forge-std/Vm.sol";
 import {console2} from "forge-std/console2.sol";
-
-address constant TRYB_DEPLOYER = 0xEE34DcaF2f48F3158Ef0BE8d0A2D37078cC9729b;
-address constant USDC_DEPLOYER = 0xcb9968Cb0d6612e1167e445774997C63a0792dbF;
-address constant USDT_DEPLOYER = 0x503560430E4b5814Dda09Ac789C3508Bb41b24B2;
 
 function DeployMockTokens() {
     Vm vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
