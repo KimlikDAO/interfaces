@@ -1,6 +1,13 @@
+[fmt]
+sort_imports = true
+single_line_statement_blocks = "single"
+
 [profile.default]
 src = 'contracts'
-solc_version = "0.8.25"
-optimier = true
-optimizer_runs = 20_000
 remappings = ['forge-std/=lib/forge-std/src/']
+
+[profile.ethereum]
+solc_version = "0.8.25"
+
+[profile.zksync]
+solc_version = "0.8.24"

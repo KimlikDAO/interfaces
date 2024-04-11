@@ -2,10 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import "./IERC20Permit.sol";
-import {KDAO_ADDR} from "./Addresses.sol";
-
-IERC20Permit constant TCKO = IERC20Permit(KDAO_ADDR);
+import {IERC20Permit} from "./IERC20Permit.sol";
 
 IERC20Permit constant TRYB = IERC20Permit(0x564A341Df6C126f90cf3ECB92120FD7190ACb401);
 

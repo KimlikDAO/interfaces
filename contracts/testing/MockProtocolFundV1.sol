@@ -2,28 +2,30 @@
 
 pragma solidity ^0.8.0;
 
-import "forge-std/console.sol";
+import {setCodeSlot} from "../ERC1967.sol";
 import {DistroStage} from "../IDistroStage.sol";
-import {IProtocolFund, RedeemInfo, REDEEM_INFO_AMOUNT_OFFSET, REDEEM_INFO_SUPPLY_OFFSET} from "../IProtocolFund.sol";
+import {IProtocolFund} from "../IProtocolFund.sol";
 import {IUpgradable} from "../IUpgradable.sol";
+import {amountAddr} from "../amountAddr.sol";
+import {console} from "forge-std/console.sol";
 
 contract MockProtocolFundV1 is IProtocolFund, IUpgradable {
-    function redeem(RedeemInfo redeemInfo) external {
-        uint256 amount = RedeemInfo.unwrap(redeemInfo) >> REDEEM_INFO_AMOUNT_OFFSET;
-        uint256 supply = uint48(RedeemInfo.unwrap(redeemInfo) >> REDEEM_INFO_SUPPLY_OFFSET);
-        address payable redeemer = payable(address(uint160(RedeemInfo.unwrap(redeemInfo))));
-        console.log("MockProtocolFundV1.redeem()", redeemer, amount, supply);
-        uint256 toSendNative = (address(this).balance * amount) / supply;
-        if (toSendNative > 0) redeemer.transfer(toSendNative);
+    function redeem(amountAddr aaddr) external override {
+        (uint256 amount, address redeemer) = aaddr.unpack();
+        console.log("MockProtocolFundV1.redeem()", redeemer, amount);
+
+        unchecked {
+            uint256 toSendNative = (address(this).balance * amount) / 100_000_000e6;
+            if (toSendNative > 0) payable(redeemer).transfer(toSendNative);
+        }
     }
 
-    function distroStageUpdated(DistroStage stage) external view {
-        console.log("MockProtocolFundV1.distroStageUpdated()", uint256(stage));
+    function versionHash() external pure override returns (bytes32) {
+        return keccak256("MockProtocolFundV1");
     }
 
-    function versionHash() external pure returns (bytes32) {
-        return 0;
+    function updateCodeTo(IUpgradable code) external override {
+        require(code.versionHash() == keccak256("MockProtocolFundV2"));
+        setCodeSlot(address(code));
     }
-
-    function migrateToCode(IUpgradable) external {}
 }

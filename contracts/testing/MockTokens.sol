@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-import "../IERC20Permit.sol";
-import "forge-std/console2.sol";
-import "forge-std/Vm.sol";
+import {IERC20Permit} from "../IERC20Permit.sol";
+import {Vm} from "forge-std/Vm.sol";
+import {console2} from "forge-std/console2.sol";
 
 address constant TRYB_DEPLOYER = 0xEE34DcaF2f48F3158Ef0BE8d0A2D37078cC9729b;
 address constant USDC_DEPLOYER = 0xcb9968Cb0d6612e1167e445774997C63a0792dbF;
@@ -83,9 +83,7 @@ contract MockERC20Permit is IERC20Permit {
 
     function transferFrom(address from, address to, uint256 amount) external override returns (bool) {
         uint256 allowed = allowance[from][msg.sender];
-        if (allowed != type(uint256).max) {
-            allowance[from][msg.sender] = allowed - amount;
-        }
+        if (allowed != type(uint256).max) allowance[from][msg.sender] = allowed - amount;
         balanceOf[from] -= amount;
         unchecked {
             balanceOf[to] += amount;
