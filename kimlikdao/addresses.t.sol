@@ -22,7 +22,7 @@ import {
 import {Test} from "forge-std/Test.sol";
 import {applyL1ToL2Alias, computeCreateAddress as computeZkSyncCreateAddress} from "zksync/IZkSync.sol";
 
-contract AddressesTest is Test {
+contract addressesTest is Test {
     function testDeployerConsistency() public pure {
         assertEq(vm.computeCreateAddress(PROTOCOL_FUND_DEPLOYER, 0), PROTOCOL_FUND);
         assertEq(computeZkSyncCreateAddress(PROTOCOL_FUND_ZKSYNC_DEPLOYER, 0), PROTOCOL_FUND_ZKSYNC);
@@ -32,8 +32,11 @@ contract AddressesTest is Test {
 
         assertEq(vm.computeCreateAddress(KDAO_MAINNET_DEPLOYER, 0), KDAO_MAINNET);
         assertEq(computeZkSyncCreateAddress(KDAO_ZKSYNC_DEPLOYER, 0), KDAO_ZKSYNC);
-        assertEq(applyL1ToL2Alias(KDAO_MAINNET), KDAO_ZKSYNC_ALIAS);
 
         assertEq(computeZkSyncCreateAddress(KDAOL_DEPLOYER, 0), KDAOL);
+    }
+
+    function testAliasConsistency() public pure {
+        assertEq(applyL1ToL2Alias(KDAO_MAINNET), KDAO_ZKSYNC_ALIAS);
     }
 }
