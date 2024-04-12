@@ -2,30 +2,11 @@
 
 pragma solidity ^0.8.0;
 
+import {L2Log} from "./L2Log.sol";
+
 enum TxStatus {
     Failure,
     Success
-}
-
-/**
- * @dev The log passed from L2
- * @param l2ShardId The shard identifier, 0 - rollup, 1 - porter. All other values are not used but are reserved for
- * the future
- * @param isService A boolean flag that is part of the log along with `key`, `value`, and `sender` address.
- * This field is required formally but does not have any special meaning.
- * @param txNumberInBatch The L2 transaction number in the batch, in which the log was sent
- * @param sender The L2 address which sent the log
- * @param key The 32 bytes of information that was sent in the log
- * @param value The 32 bytes of information that was sent in the log
- * Both `key` and `value` are arbitrary 32-bytes selected by the log sender
- */
-struct L2Log {
-    uint8 l2ShardId;
-    bool isService;
-    uint16 txNumberInBatch;
-    address sender;
-    bytes32 key;
-    bytes32 value;
 }
 
 uint160 constant ALIAS_OFFSET = uint160(0x1111000000000000000000000000000000001111);
