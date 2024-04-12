@@ -34,8 +34,22 @@ function dec(uint128x2 self, uint256 delta) pure returns (uint128x2) {
     }
 }
 
+function sum(uint128x2 self) pure returns (uint256) {
+    unchecked {
+        return (uint128x2.unwrap(self) >> 128) + uint128(uint128x2.unwrap(self));
+    }
+}
+
+function clearLo(uint128x2 self) pure returns (uint128x2) {
+    return uint128x2.wrap(uint128x2.unwrap(self) & ~type(uint128).max);
+}
+
+function clearHi(uint128x2 self) pure returns (uint128x2) {
+    return uint128x2.wrap(uint128x2.unwrap(self) & type(uint128).max);
+}
+
 function equal(uint128x2 self, uint128x2 other) pure returns (bool) {
     return uint128x2.unwrap(self) == uint128x2.unwrap(other);
 }
 
-using {hi, lo, decLo, inc, dec, equal as ==} for uint128x2 global;
+using {hi, lo, decLo, inc, dec, sum, clearLo, clearHi, equal as ==} for uint128x2 global;

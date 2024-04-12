@@ -6,9 +6,9 @@ enum DistroStage {
     Presale1,
     Presale2,
     ProtocolSaleStart,
-    ProtocolSaleEnd,
+    ProtocolSaleEnd, // Unlocks Presale1
     ProtocolAMMStart,
-    Presale2Unlock,
+    Presale2Unlock, // Unlocks Presale2
     FinalMint,
     FinalUnlock
 }

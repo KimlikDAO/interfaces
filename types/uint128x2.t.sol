@@ -31,4 +31,28 @@ contract uint128x2Test is Test {
 
         assert(pair2 == pair3);
     }
+
+    function tesetClear() public pure {
+        uint128x2 i = uint128x2From(2, 1);
+
+        i = i.clearHi();
+        assertEq(i.hi(), 0);
+        assertEq(i.lo(), 1);
+
+        uint128x2 j = uint128x2From(3, 2);
+
+        j = j.clearLo();
+        j = j.clearLo();
+        assertEq(j.hi(), 3);
+        assertEq(j.lo(), 0);
+    }
+
+    function testSum() public pure {
+        uint128x2 i = uint128x2From(type(uint128).max - 1, 1);
+
+        assertEq(i.sum(), type(uint128).max);
+        assertEq(uint128x2From(1, 2).sum(), 3);
+        assertEq(uint128x2From(2, 3).sum(), 5);
+        assertEq(uint128x2From(1337, 1338).sum(), 2 * 1337 + 1);
+    }
 }
