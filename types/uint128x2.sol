@@ -8,18 +8,12 @@ function uint128x2From(uint256 high, uint256 low) pure returns (uint128x2) {
     return uint128x2.wrap(high << 128 | low);
 }
 
-function hi(uint128x2 n) pure returns (uint256) {
-    return uint128x2.unwrap(n) >> 128;
+function hi(uint128x2 self) pure returns (uint256) {
+    return uint128x2.unwrap(self) >> 128;
 }
 
-function lo(uint128x2 n) pure returns (uint256) {
-    return uint128(uint128x2.unwrap(n));
-}
-
-function decLo(uint128x2 self, uint256 delta) pure returns (uint128x2) {
-    unchecked {
-        return uint128x2.wrap(uint128x2.unwrap(self) - delta);
-    }
+function lo(uint128x2 self) pure returns (uint256) {
+    return uint128(uint128x2.unwrap(self));
 }
 
 function inc(uint128x2 self, uint256 delta) pure returns (uint128x2) {
@@ -31,6 +25,30 @@ function inc(uint128x2 self, uint256 delta) pure returns (uint128x2) {
 function dec(uint128x2 self, uint256 delta) pure returns (uint128x2) {
     unchecked {
         return uint128x2.wrap(uint128x2.unwrap(self) - (delta | (delta << 128)));
+    }
+}
+
+function incHi(uint128x2 self, uint256 delta) pure returns (uint128x2) {
+    unchecked {
+        return uint128x2.wrap(uint128x2.unwrap(self) + (delta << 128));
+    }
+}
+
+function incLo(uint128x2 self, uint256 delta) pure returns (uint128x2) {
+    unchecked {
+        return uint128x2.wrap(uint128x2.unwrap(self) + delta);
+    }
+}
+
+function decHi(uint128x2 self, uint256 delta) pure returns (uint128x2) {
+    unchecked {
+        return uint128x2.wrap(uint128x2.unwrap(self) - (delta << 128));
+    }
+}
+
+function decLo(uint128x2 self, uint256 delta) pure returns (uint128x2) {
+    unchecked {
+        return uint128x2.wrap(uint128x2.unwrap(self) - delta);
     }
 }
 
@@ -52,4 +70,4 @@ function equal(uint128x2 self, uint128x2 other) pure returns (bool) {
     return uint128x2.unwrap(self) == uint128x2.unwrap(other);
 }
 
-using {hi, lo, decLo, inc, dec, sum, clearLo, clearHi, equal as ==} for uint128x2 global;
+using {hi, lo, inc, dec, incHi, incLo, decHi, decLo, sum, clearHi, clearLo, equal as ==} for uint128x2 global;

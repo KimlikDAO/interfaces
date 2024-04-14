@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import {uint128x2} from "types/uint128x2.sol";
+import {uint128x2} from "../types/uint128x2.sol";
 
 struct Signature {
     bytes32 r;

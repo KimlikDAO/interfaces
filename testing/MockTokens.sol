@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import {TRYB_DEPLOYER, USDC_DEPLOYER, USDT_DEPLOYER} from "avalanche/addresses.sol";
-import {IERC20Permit} from "erc/IERC20Permit.sol";
+import {TRYB_DEPLOYER, USDC_DEPLOYER, USDT_DEPLOYER} from "../avalanche/addresses.sol";
+import {IERC20Permit} from "../erc/IERC20Permit.sol";
 import {Vm} from "forge-std/Vm.sol";
 import {console2} from "forge-std/console2.sol";
 

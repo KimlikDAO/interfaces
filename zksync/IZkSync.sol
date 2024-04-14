@@ -87,7 +87,7 @@ interface IZkSync {
         bytes32 l2TxHash,
         uint256 l2BatchNumber,
         uint256 l2MessageIndex,
-        uint16 l2TxNumberInBatch,
+        uint256 l2TxNumberInBatch,
         bytes32[] calldata merkleProof,
         TxStatus status
     ) external view returns (bool);

@@ -20,4 +20,8 @@ function addr(amountAddr self) pure returns (address) {
     return address(uint160(amountAddr.unwrap(self)));
 }
 
-using {unpack, amount, addr} for amountAddr global;
+function notEqual(amountAddr self, amountAddr other) pure returns (bool) {
+    return amountAddr.unwrap(self) != amountAddr.unwrap(other);
+}
+
+using {unpack, amount, addr, notEqual as !=} for amountAddr global;
