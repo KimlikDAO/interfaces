@@ -24,4 +24,8 @@ function notEqual(amountAddr self, amountAddr other) pure returns (bool) {
     return amountAddr.unwrap(self) != amountAddr.unwrap(other);
 }
 
-using {unpack, amount, addr, notEqual as !=} for amountAddr global;
+function isZero(amountAddr self) pure returns (bool) {
+    return amountAddr.unwrap(self) == 0;
+}
+
+using {unpack, amount, addr, isZero, notEqual as !=} for amountAddr global;

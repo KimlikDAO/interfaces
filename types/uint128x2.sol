@@ -52,6 +52,10 @@ function decLo(uint128x2 self, uint256 delta) pure returns (uint128x2) {
     }
 }
 
+function setLo(uint128x2 self, uint256 val) pure returns (uint128x2) {
+    return uint128x2.wrap((uint128x2.unwrap(self) & (~uint256(0) << 128)) | val);
+}
+
 function sum(uint128x2 self) pure returns (uint256) {
     unchecked {
         return (uint128x2.unwrap(self) >> 128) + uint128(uint128x2.unwrap(self));
@@ -70,4 +74,30 @@ function equal(uint128x2 self, uint128x2 other) pure returns (bool) {
     return uint128x2.unwrap(self) == uint128x2.unwrap(other);
 }
 
-using {hi, lo, inc, dec, incHi, incLo, decHi, decLo, sum, clearHi, clearLo, equal as ==} for uint128x2 global;
+/**
+ * Given a fraction (hi, lo) and a value val, computes the tuple (val * hi / lo, val) efficiently.
+ *
+ * @return (val * hi / lo, val)
+ */
+function fracMul(uint128x2 self, uint256 val) pure returns (uint128x2) {
+    unchecked {
+        return uint128x2.wrap(uint128x2.unwrap(self) * val / uint128(uint128x2.unwrap(self))).setLo(val);
+    }
+}
+
+using {
+    hi,
+    lo,
+    inc,
+    dec,
+    incHi,
+    incLo,
+    decHi,
+    decLo,
+    setLo,
+    sum,
+    clearHi,
+    clearLo,
+    fracMul,
+    equal as ==
+} for uint128x2 global;

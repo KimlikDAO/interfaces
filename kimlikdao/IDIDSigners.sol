@@ -27,6 +27,12 @@ uint256 constant SIGNER_INFO_WITHDRAW_MASK = uint256(type(uint48).max) << 176;
  */
 type SignerInfo is uint256;
 
+function deposit(SignerInfo self) pure returns (uint256) {
+    return uint48(SignerInfo.unwrap(self) >> 64);
+}
+
+using {deposit} for SignerInfo global;
+
 interface IDIDSigners {
     function authenticateExposureReportID3Sigs(
         bytes32 exposureReportID,

@@ -2,34 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import {TRYB_DEPLOYER, USDC_DEPLOYER, USDT_DEPLOYER} from "../avalanche/addresses.sol";
 import {IERC20Permit} from "../erc/IERC20Permit.sol";
-import {Vm} from "forge-std/Vm.sol";
-import {console2} from "forge-std/console2.sol";
 
-function DeployMockTokens() {
-    Vm vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
-
-    vm.setNonce(TRYB_DEPLOYER, 2);
-    vm.prank(TRYB_DEPLOYER);
-    IERC20Permit tryb = new MockERC20Permit("TRYB", "BiLira", 6);
-    console2.log("TRYB:", address(tryb));
-
-    vm.setNonce(USDC_DEPLOYER, 4);
-    vm.prank(USDC_DEPLOYER);
-    IERC20Permit usdc = new MockERC20Permit("USDC", "USD Coin", 6);
-    console2.log("USDC:", address(usdc));
-
-    vm.setNonce(USDT_DEPLOYER, 2);
-    vm.prank(USDT_DEPLOYER);
-    IERC20Permit usdt = new MockERC20Permit("USDt", "TetherToken", 6);
-    console2.log("USDT:", address(usdt));
-}
-
-/**
- * @title Example ERC20Permit contract for mocking the tokens we accept as
- * payment for testing purposes.
- */
 contract MockERC20Permit is IERC20Permit {
     // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
@@ -57,7 +31,7 @@ contract MockERC20Permit is IERC20Permit {
                 keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
                 keccak256(bytes(tokenSymbol)),
                 keccak256(bytes("1")),
-                0x144,
+                block.chainid,
                 address(this)
             )
         );

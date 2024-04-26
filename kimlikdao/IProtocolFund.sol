@@ -11,7 +11,7 @@ function RedeemInfoFrom(uint48x2 totalAndAmount, address redeemer) pure returns 
     return RedeemInfo.wrap(uint48x2.unwrap(totalAndAmount) << 160 | uint160(redeemer));
 }
 
-function unpack(RedeemInfo self) returns (uint256 total, uint256 redeemed, address redeemer) {
+function unpack(RedeemInfo self) pure returns (uint256 total, uint256 redeemed, address redeemer) {
     uint256 val = RedeemInfo.unwrap(self);
     return (val >> 208, uint48(val >> 160), address(uint160(val)));
 }
