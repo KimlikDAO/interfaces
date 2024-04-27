@@ -4,38 +4,14 @@ pragma solidity ^0.8.0;
 
 import {IERC20Permit} from "../erc/IERC20Permit.sol";
 
-contract MockERC20Permit is IERC20Permit {
+abstract contract MockERC20Permit is IERC20Permit {
     // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
-    bytes32 public immutable override DOMAIN_SEPARATOR;
-    uint8 public immutable override decimals;
 
-    string public override name;
-    string public override symbol;
     uint256 public override totalSupply;
     mapping(address => uint256) public override balanceOf;
     mapping(address => mapping(address => uint256)) public override allowance;
     mapping(address => uint256) public override nonces;
-
-    constructor(string memory tokenSymbol, string memory tokenName, uint8 tokenDecimals) {
-        name = tokenName;
-        symbol = tokenSymbol;
-        decimals = tokenDecimals;
-        uint256 toMint = 100 * 10 ** decimals;
-        balanceOf[msg.sender] = toMint;
-        totalSupply = toMint;
-
-        emit Transfer(address(this), msg.sender, toMint);
-        DOMAIN_SEPARATOR = keccak256(
-            abi.encode(
-                keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
-                keccak256(bytes(tokenSymbol)),
-                keccak256(bytes("1")),
-                block.chainid,
-                address(this)
-            )
-        );
-    }
 
     function approve(address spender, uint256 amount) external returns (bool) {
         allowance[msg.sender][spender] = amount;
@@ -71,7 +47,7 @@ contract MockERC20Permit is IERC20Permit {
             bytes32 digest = keccak256(
                 abi.encodePacked(
                     "\x19\x01",
-                    DOMAIN_SEPARATOR,
+                    DOMAIN_SEPARATOR(),
                     keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, amount, nonces[owner]++, deadline))
                 )
             );
@@ -81,6 +57,8 @@ contract MockERC20Permit is IERC20Permit {
         allowance[owner][spender] = amount;
         emit Approval(owner, spender, amount);
     }
+
+    function DOMAIN_SEPARATOR() public pure virtual override returns (bytes32);
 
     function mint(uint256 amount) external {
         balanceOf[msg.sender] += amount;
