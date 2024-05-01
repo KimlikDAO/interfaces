@@ -6,7 +6,7 @@ import {Test} from "forge-std/Test.sol";
 import {L2LogLocator, L2LogLocatorFrom} from "zksync/L2Log.sol";
 
 contract L2LogLocatorTest is Test {
-    function testAccessors() public pure {
+    function testAccessors() external pure {
         L2LogLocator l = L2LogLocatorFrom(1, 2, 3);
         assertEq(l.batchNumber(), 1);
         assertEq(l.messageIndex(), 2);

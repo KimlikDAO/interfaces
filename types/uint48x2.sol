@@ -65,11 +65,11 @@ function sum(uint48x2 self) pure returns (uint256) {
 }
 
 function clearLo(uint48x2 self) pure returns (uint48x2) {
-    return uint48x2.wrap(uint48x2.unwrap(self) & ~type(uint48).max);
+    return uint48x2.wrap(uint48x2.unwrap(self) & (~uint256(0) << 48));
 }
 
 function clearHi(uint48x2 self) pure returns (uint48x2) {
-    return uint48x2.wrap(uint48x2.unwrap(self) & type(uint48).max);
+    return uint48x2.wrap(uint48x2.unwrap(self) & (~uint256(0) >> 208));
 }
 
 function equal(uint48x2 self, uint48x2 other) pure returns (bool) {

@@ -2,18 +2,18 @@
 
 pragma solidity ^0.8.0;
 
-import {uint48x2, uint48x2From} from "types/uint48x2.sol";
 import {Test} from "forge-std/Test.sol";
+import {uint48x2, uint48x2From} from "types/uint48x2.sol";
 
 contract uint48x2Test is Test {
-    function testAccessors() public pure {
+    function testAccessors() external pure {
         uint48x2 pair = uint48x2From(1, 2);
 
         assertEq(pair.lo(), 2);
         assertEq(pair.hi(), 1);
     }
 
-    function testIncDec() public pure {
+    function testIncDec() external pure {
         uint48x2 pair = uint48x2From(300, 500);
         pair = pair.inc(200);
 
@@ -32,7 +32,7 @@ contract uint48x2Test is Test {
         assert(pair2 == pair3);
     }
 
-    function tesetClear() public pure {
+    function tesetClear() external pure {
         uint48x2 i = uint48x2From(2, 1);
 
         i = i.clearHi();
@@ -47,7 +47,7 @@ contract uint48x2Test is Test {
         assertEq(j.lo(), 0);
     }
 
-    function testSum() public pure {
+    function testSum() external pure {
         uint48x2 i = uint48x2From(type(uint48).max - 1, 1);
 
         assertEq(i.sum(), type(uint48).max);
@@ -56,10 +56,24 @@ contract uint48x2Test is Test {
         assertEq(uint48x2From(1337, 1338).sum(), 2 * 1337 + 1);
     }
 
-    function testSetLo() public pure {
+    function testSetLo() external pure {
         uint48x2 i = uint48x2From(2, 3);
 
         assertEq(i.setLo(4).hi(), 2);
         assertEq(i.setLo(4).lo(), 4);
+    }
+
+    function testClearLo() external pure {
+        uint48x2 n = uint48x2From(3, 2).clearLo();
+
+        assertEq(n.hi(), 3);
+        assertEq(n.lo(), 0);
+    }
+
+    function testClearHi() external pure {
+        uint48x2 n = uint48x2From(3, 2).clearHi();
+
+        assertEq(n.hi(), 0);
+        assertEq(n.lo(), 2);
     }
 }

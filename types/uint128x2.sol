@@ -63,11 +63,11 @@ function sum(uint128x2 self) pure returns (uint256) {
 }
 
 function clearLo(uint128x2 self) pure returns (uint128x2) {
-    return uint128x2.wrap(uint128x2.unwrap(self) & ~type(uint128).max);
+    return uint128x2.wrap(uint128x2.unwrap(self) & (~uint256(0) << 128));
 }
 
 function clearHi(uint128x2 self) pure returns (uint128x2) {
-    return uint128x2.wrap(uint128x2.unwrap(self) & type(uint128).max);
+    return uint128x2.wrap(uint128x2.unwrap(self) & (~uint256(0) >> 128));
 }
 
 function equal(uint128x2 self, uint128x2 other) pure returns (bool) {
