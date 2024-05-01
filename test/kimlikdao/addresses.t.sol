@@ -4,10 +4,10 @@ pragma solidity ^0.8.0;
 
 import {Test} from "forge-std/Test.sol";
 import {
-    KDAOL,
-    KDAOL_DEPLOYER,
-    KDAO_MAINNET,
-    KDAO_MAINNET_DEPLOYER,
+    KDAO_ETHEREUM,
+    KDAO_ETHEREUM_DEPLOYER,
+    KDAO_LOCKED,
+    KDAO_LOCKED_DEPLOYER,
     KDAO_ZKSYNC,
     KDAO_ZKSYNC_ALIAS,
     KDAO_ZKSYNC_DEPLOYER,
@@ -30,13 +30,13 @@ contract addressesTest is Test {
         assertEq(vm.computeCreateAddress(KPASS_DEPLOYER, 0), KPASS);
         assertEq(computeZkSyncCreateAddress(KPASS_ZKSYNC_DEPLOYER, 0), KPASS_ZKSYNC);
 
-        assertEq(vm.computeCreateAddress(KDAO_MAINNET_DEPLOYER, 0), KDAO_MAINNET);
+        assertEq(vm.computeCreateAddress(KDAO_ETHEREUM_DEPLOYER, 0), KDAO_ETHEREUM);
         assertEq(computeZkSyncCreateAddress(KDAO_ZKSYNC_DEPLOYER, 0), KDAO_ZKSYNC);
 
-        assertEq(computeZkSyncCreateAddress(KDAOL_DEPLOYER, 0), KDAOL);
+        assertEq(computeZkSyncCreateAddress(KDAO_LOCKED_DEPLOYER, 0), KDAO_LOCKED);
     }
 
     function testAliasConsistency() public pure {
-        assertEq(applyL1ToL2Alias(KDAO_MAINNET), KDAO_ZKSYNC_ALIAS);
+        assertEq(applyL1ToL2Alias(KDAO_ETHEREUM), KDAO_ZKSYNC_ALIAS);
     }
 }

@@ -5,12 +5,36 @@ pragma solidity ^0.8.0;
 import {Signature} from "../types/Signature.sol";
 import {uint128x2} from "../types/uint128x2.sol";
 
+interface IDIDSigners {
+    function authenticateHumanIDv1(
+        bytes32 exposureReportID,
+        uint128x2 weightThresholdAndSignatureTs,
+        bytes32 commitmentR,
+        Signature[3] calldata sigs
+    ) external view;
+
+    function authenticateHumanIDv1(
+        bytes32 humanID,
+        uint128x2 weightThresholdAndSignatureTs,
+        bytes32 commitmentR,
+        Signature[5] calldata sigs
+    ) external view;
+
+    /**
+     * Maps a signer node address to a bit packed struct.
+     */
+    function signerInfo(address signer) external view returns (SignerInfo);
+}
+
+interface IDIDSignersExposureReport {
+    function reportExposure(bytes32 exposureReportID, uint256 signatureTs, Signature[3] calldata sigs) external;
+}
+
 uint256 constant SIGNER_INFO_END_TS_MASK = uint256(type(uint64).max) << 112;
 
 uint256 constant SIGNER_INFO_WITHDRAW_MASK = uint256(type(uint48).max) << 176;
 
 /**
- *
  * `signerInfo` layout:
  * |-- color --|-- withdraw --|--  endTs --|-- deposit --|-- startTs --|
  * |--   32  --|--    48    --|--   64   --|--   48    --|--   64    --|
@@ -73,28 +97,3 @@ using {
     hasEndTs,
     isZero
 } for SignerInfo global;
-
-interface IDIDSigners {
-    function authenticateHumanIDv1(
-        bytes32 exposureReportID,
-        uint128x2 weightThresholdAndSignatureTs,
-        bytes32 commitmentR,
-        Signature[3] calldata sigs
-    ) external view;
-
-    function authenticateHumanIDv1(
-        bytes32 humanID,
-        uint128x2 weightThresholdAndSignatureTs,
-        bytes32 commitmentR,
-        Signature[5] calldata sigs
-    ) external view;
-
-    /**
-     * Maps a signer node address to a bit packed struct.
-     */
-    function signerInfo(address signer) external view returns (SignerInfo);
-}
-
-interface IDIDSignersExposureReport {
-    function reportExposure(bytes32 exposureReportID, uint256 signatureTs, Signature[3] calldata sigs) external;
-}
