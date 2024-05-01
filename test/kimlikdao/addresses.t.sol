@@ -2,6 +2,7 @@
 
 pragma solidity ^0.8.0;
 
+import {Test} from "forge-std/Test.sol";
 import {
     KDAOL,
     KDAOL_DEPLOYER,
@@ -18,8 +19,7 @@ import {
     PROTOCOL_FUND_DEPLOYER,
     PROTOCOL_FUND_ZKSYNC,
     PROTOCOL_FUND_ZKSYNC_DEPLOYER
-} from "./addresses.sol";
-import {Test} from "forge-std/Test.sol";
+} from "kimlikdao/addresses.sol";
 import {applyL1ToL2Alias, computeCreateAddress as computeZkSyncCreateAddress} from "zksync/IZkSync.sol";
 
 contract addressesTest is Test {

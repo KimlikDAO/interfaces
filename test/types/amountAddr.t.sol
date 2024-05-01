@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import {amountAddr, amountAddrFrom} from "./amountAddr.sol";
+import {amountAddr, amountAddrFrom} from "types/amountAddr.sol";
 import {Test} from "forge-std/Test.sol";
 
 contract amountAddrTest is Test {

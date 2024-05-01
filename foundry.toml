@@ -3,7 +3,9 @@ sort_imports = true
 single_line_statement_blocks = "single"
 
 [profile.default]
-test = "./"
+test = "test"
+optimizer = true
+optimizer_runs = 20_000
 remappings = ['forge-std/=lib/forge-std/src/']
 
 [profile.ethereum]
