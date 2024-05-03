@@ -20,7 +20,10 @@ import {
     PROTOCOL_FUND_ZKSYNC,
     PROTOCOL_FUND_ZKSYNC_DEPLOYER
 } from "kimlikdao/addresses.sol";
-import {applyL1ToL2Alias, computeCreateAddress as computeZkSyncCreateAddress} from "zksync/IZkSync.sol";
+import {
+    applyL1ToL2Alias,
+    computeCreateAddress as computeZkSyncCreateAddress
+} from "zksync/IZkSync.sol";
 
 contract addressesTest is Test {
     function testDeployerConsistency() public pure {

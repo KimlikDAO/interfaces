@@ -17,7 +17,8 @@ contract L2LogLocatorTest is Test {
         assertEq(k.messageIndex(), type(uint112).max);
         assertEq(k.txNumber(), type(uint16).max);
 
-        L2LogLocator m = L2LogLocatorFrom(type(uint128).max - 1, type(uint112).max - 1, type(uint16).max - 1);
+        L2LogLocator m =
+            L2LogLocatorFrom(type(uint128).max - 1, type(uint112).max - 1, type(uint16).max - 1);
         assertEq(m.batchNumber(), type(uint128).max - 1);
         assertEq(m.messageIndex(), type(uint112).max - 1);
         assertEq(m.txNumber(), type(uint16).max - 1);

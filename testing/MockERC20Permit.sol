@@ -2,16 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20Permit} from "../erc/IERC20Permit.sol";
+import {IERC20, IERC20Permit} from "../erc/IERC20Permit.sol";
 
-abstract contract MockERC20Permit is IERC20Permit {
-    // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
-    bytes32 public constant PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
-
+abstract contract MockERC20 is IERC20 {
     uint256 public override totalSupply;
     mapping(address => uint256) public override balanceOf;
     mapping(address => mapping(address => uint256)) public override allowance;
-    mapping(address => uint256) public override nonces;
 
     function approve(address spender, uint256 amount) external returns (bool) {
         allowance[msg.sender][spender] = amount;
@@ -28,7 +24,11 @@ abstract contract MockERC20Permit is IERC20Permit {
         return true;
     }
 
-    function transferFrom(address from, address to, uint256 amount) external override returns (bool) {
+    function transferFrom(address from, address to, uint256 amount)
+        external
+        override
+        returns (bool)
+    {
         uint256 allowed = allowance[from][msg.sender];
         if (allowed != type(uint256).max) allowance[from][msg.sender] = allowed - amount;
         balanceOf[from] -= amount;
@@ -39,16 +39,38 @@ abstract contract MockERC20Permit is IERC20Permit {
         return true;
     }
 
-    function permit(address owner, address spender, uint256 amount, uint256 deadline, uint8 v, bytes32 r, bytes32 s)
-        external
-    {
+    function mint(uint256 amount) external {
+        balanceOf[msg.sender] += amount;
+    }
+}
+
+abstract contract MockERC20Permit is MockERC20, IERC20Permit {
+    // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
+    bytes32 public constant PERMIT_TYPEHASH =
+        0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;
+
+    mapping(address => uint256) public override nonces;
+
+    function permit(
+        address owner,
+        address spender,
+        uint256 amount,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) external {
         require(deadline >= block.timestamp);
         unchecked {
             bytes32 digest = keccak256(
                 abi.encodePacked(
                     "\x19\x01",
                     DOMAIN_SEPARATOR(),
-                    keccak256(abi.encode(PERMIT_TYPEHASH, owner, spender, amount, nonces[owner]++, deadline))
+                    keccak256(
+                        abi.encode(
+                            PERMIT_TYPEHASH, owner, spender, amount, nonces[owner]++, deadline
+                        )
+                    )
                 )
             );
             address recovered = ecrecover(digest, v, r, s);
@@ -59,8 +81,4 @@ abstract contract MockERC20Permit is IERC20Permit {
     }
 
     function DOMAIN_SEPARATOR() public pure virtual override returns (bytes32);
-
-    function mint(uint256 amount) external {
-        balanceOf[msg.sender] += amount;
-    }
 }

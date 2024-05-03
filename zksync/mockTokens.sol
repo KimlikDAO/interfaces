@@ -6,15 +6,14 @@ import {IERC20Permit} from "../erc/IERC20Permit.sol";
 import {MockERC20Permit} from "../testing/MockERC20Permit.sol";
 import {USDT} from "./addresses.sol";
 import {Vm} from "forge-std/Vm.sol";
-import {console2} from "forge-std/console2.sol";
-
-address constant USDT_DEPLOYER = 0x493257fD37EDB34451f62EDf8D2a0C418852bA4C;
 
 contract USDTImpl is MockERC20Permit {
     function DOMAIN_SEPARATOR() public pure override returns (bytes32) {
         return keccak256(
             abi.encode(
-                keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
+                keccak256(
+                    "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
+                ),
                 keccak256(bytes("KPASS")),
                 keccak256(bytes("1")),
                 0x144,
@@ -35,7 +34,7 @@ contract USDTImpl is MockERC20Permit {
         return 6;
     }
 
-    constructor() {
+    function initialize() external {
         uint256 toMint = 100 * 10e6;
         balanceOf[msg.sender] = toMint;
         totalSupply = toMint;
@@ -46,7 +45,6 @@ contract USDTImpl is MockERC20Permit {
 function deployMockTokens() {
     Vm vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
 
-    vm.setNonce(USDT_DEPLOYER, 4);
-    vm.prank(USDT_DEPLOYER);
-    new USDTImpl();
+    vm.etch(address(USDT), type(USDTImpl).runtimeCode);
+    USDTImpl(address(USDT)).initialize();
 }

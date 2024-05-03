@@ -11,14 +11,14 @@ interface IDIDSigners {
         uint128x2 weightThresholdAndSignatureTs,
         bytes32 commitmentR,
         Signature[3] calldata sigs
-    ) external view;
+    ) external view returns (bool);
 
     function authenticateHumanIDv1(
         bytes32 humanID,
         uint128x2 weightThresholdAndSignatureTs,
         bytes32 commitmentR,
         Signature[5] calldata sigs
-    ) external view;
+    ) external view returns (bool);
 
     /**
      * Maps a signer node address to a bit packed struct.
@@ -27,7 +27,11 @@ interface IDIDSigners {
 }
 
 interface IDIDSignersExposureReport {
-    function reportExposure(bytes32 exposureReportID, uint256 signatureTs, Signature[3] calldata sigs) external;
+    function reportExposure(
+        bytes32 exposureReportID,
+        uint256 signatureTs,
+        Signature[3] calldata sigs
+    ) external;
 }
 
 uint256 constant SIGNER_INFO_END_TS_MASK = uint256(type(uint64).max) << 112;
@@ -41,7 +45,10 @@ uint256 constant SIGNER_INFO_WITHDRAW_MASK = uint256(type(uint48).max) << 176;
  */
 type SignerInfo is uint256;
 
-function SignerInfoFrom(uint256 _color, uint256 _deposit, uint256 _startTs) pure returns (SignerInfo) {
+function SignerInfoFrom(uint256 _color, uint256 _deposit, uint256 _startTs)
+    pure
+    returns (SignerInfo)
+{
     return SignerInfo.wrap((_color << 224) | (_deposit << 64) | _startTs);
 }
 
