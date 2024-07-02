@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 import {Test} from "forge-std/Test.sol";
-import {amountAddr, amountAddrFrom} from "types/amountAddr.sol";
+import {amountAddr, amountAddrFrom} from "../amountAddr.sol";
 
 contract amountAddrTest is Test {
     function testAccessors() external pure {

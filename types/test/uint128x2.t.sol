@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 import {Test} from "forge-std/Test.sol";
-import {uint128x2, uint128x2From} from "types/uint128x2.sol";
+import {uint128x2, uint128x2From} from "../uint128x2.sol";
 
 contract uint128x2Test is Test {
     function testAccessors() external pure {

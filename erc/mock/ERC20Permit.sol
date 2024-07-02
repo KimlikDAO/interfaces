@@ -2,9 +2,9 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20, IERC20Permit} from "../erc/IERC20Permit.sol";
+import {IERC20, IERC20Permit} from "../IERC20Permit.sol";
 
-abstract contract MockERC20 is IERC20 {
+abstract contract ERC20 is IERC20 {
     uint256 public override totalSupply;
     mapping(address => uint256) public override balanceOf;
     mapping(address => mapping(address => uint256)) public override allowance;
@@ -44,7 +44,7 @@ abstract contract MockERC20 is IERC20 {
     }
 }
 
-abstract contract MockERC20Permit is MockERC20, IERC20Permit {
+abstract contract ERC20Permit is ERC20, IERC20Permit {
     // keccak256("Permit(address owner,address spender,uint256 value,uint256 nonce,uint256 deadline)");
     bytes32 public constant PERMIT_TYPEHASH =
         0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126c9;

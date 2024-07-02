@@ -7,9 +7,5 @@ sort_imports = true
 optimizer = true
 optimizer_runs = 20_000
 remappings = ['forge-std/=lib/forge-std/src/']
-
-[profile.ethereum]
-solc_version = "0.8.25"
-
-[profile.zksync]
-solc_version = "0.8.24"
+test = "./"
+solc_version = "0.8.26"

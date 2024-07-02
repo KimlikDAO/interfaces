@@ -2,12 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20Permit} from "../erc/IERC20Permit.sol";
-import {MockERC20, MockERC20Permit} from "../testing/MockERC20Permit.sol";
-import {USDT} from "./addresses.sol";
+import {IERC20Permit} from "../../erc/IERC20Permit.sol";
+import {ERC20, ERC20Permit} from "../../erc/mock/ERC20Permit.sol";
+import {USDT} from "../addresses.sol";
 import {Vm} from "forge-std/Vm.sol";
 
-contract USDTImpl is MockERC20 {
+contract USDTImpl is ERC20 {
     function name() public pure returns (string memory) {
         return "Tether USD";
     }

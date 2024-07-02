@@ -2,12 +2,12 @@
 
 pragma solidity ^0.8.0;
 
-import {IERC20Permit} from "../erc/IERC20Permit.sol";
-import {MockERC20Permit} from "../testing/MockERC20Permit.sol";
-import {USDT} from "./addresses.sol";
+import {IERC20Permit} from "../../erc/IERC20Permit.sol";
+import {ERC20Permit} from "../../erc/mock/ERC20Permit.sol";
+import {USDT} from "../addresses.sol";
 import {Vm} from "forge-std/Vm.sol";
 
-contract USDTImpl is MockERC20Permit {
+contract USDTImpl is ERC20Permit {
     function DOMAIN_SEPARATOR() public pure override returns (bytes32) {
         return keccak256(
             abi.encode(
