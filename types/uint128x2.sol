@@ -81,7 +81,9 @@ function equal(uint128x2 self, uint128x2 other) pure returns (bool) {
  */
 function fracMul(uint128x2 self, uint256 val) pure returns (uint128x2) {
     unchecked {
-        return uint128x2.wrap(uint128x2.unwrap(self) * val / uint128(uint128x2.unwrap(self))).setLo(val);
+        return uint128x2.wrap(uint128x2.unwrap(self) * val / uint128(uint128x2.unwrap(self))).setLo(
+            val
+        );
     }
 }
 

@@ -2,9 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import {
-    TRYB, TRYB_DEPLOYER, USDC, USDC_DEPLOYER, USDT, USDT_DEPLOYER
-} from "../addresses.sol";
+import {TRYB, TRYB_DEPLOYER, USDC, USDC_DEPLOYER, USDT, USDT_DEPLOYER} from "../addresses.sol";
 import {Test} from "forge-std/Test.sol";
 
 contract addressesTest is Test {

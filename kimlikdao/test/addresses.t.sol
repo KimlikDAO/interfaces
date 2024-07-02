@@ -2,7 +2,10 @@
 
 pragma solidity ^0.8.0;
 
-import {Test} from "forge-std/Test.sol";
+import {
+    applyL1ToL2Alias,
+    computeCreateAddress as computeZkSyncCreateAddress
+} from "../../zksync/IZkSync.sol";
 import {
     KDAO,
     KDAO_DEPLOYER,
@@ -13,10 +16,7 @@ import {
     KPASS_ZKSYNC,
     KPASS_ZKSYNC_DEPLOYER
 } from "../addresses.sol";
-import {
-    applyL1ToL2Alias,
-    computeCreateAddress as computeZkSyncCreateAddress
-} from "../../zksync/IZkSync.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract addressesTest is Test {
     function testDeployerConsistency() public pure {

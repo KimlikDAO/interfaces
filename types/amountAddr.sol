@@ -21,7 +21,9 @@ function addr(amountAddr self) pure returns (address) {
 }
 
 function setAddr(amountAddr self, address _addr) pure returns (amountAddr) {
-    return amountAddr.wrap(amountAddr.unwrap(self) & (type(uint256).max << 160) | uint256(uint160(_addr)));
+    return amountAddr.wrap(
+        amountAddr.unwrap(self) & (type(uint256).max << 160) | uint256(uint160(_addr))
+    );
 }
 
 function addAddr(amountAddr self, address _addr) pure returns (amountAddr) {
@@ -40,4 +42,13 @@ function toBytes32(amountAddr self) pure returns (bytes32) {
     return bytes32(amountAddr.unwrap(self));
 }
 
-using {unpack, amount, addr, addAddr, setAddr, isZero, toBytes32, notEqual as !=} for amountAddr global;
+using {
+    unpack,
+    amount,
+    addr,
+    addAddr,
+    setAddr,
+    isZero,
+    toBytes32,
+    notEqual as !=
+} for amountAddr global;

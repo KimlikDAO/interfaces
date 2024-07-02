@@ -22,3 +22,7 @@ struct Signature {
     bytes32 r;
     YParityAndS yParityAndS;
 }
+
+function SignatureFrom(uint8 v, bytes32 r, bytes32 s_) pure returns (Signature memory) {
+    return Signature(r, YParityAndS.wrap((uint256(v - 27) << 255) | uint256(s_)));
+}

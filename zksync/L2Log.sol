@@ -25,7 +25,10 @@ struct L2Log {
 
 type L2LogLocator is uint256;
 
-function L2LogLocatorFrom(uint256 _batchNumber, uint256 _messageIndex, uint256 _txNumber) pure returns (L2LogLocator) {
+function L2LogLocatorFrom(uint256 _batchNumber, uint256 _messageIndex, uint256 _txNumber)
+    pure
+    returns (L2LogLocator)
+{
     return L2LogLocator.wrap(_batchNumber << 128 | _messageIndex << 16 | _txNumber);
 }
 

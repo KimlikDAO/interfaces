@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.20;
 
-import {Test} from "forge-std/Test.sol";
 import {L2LogLocator, L2LogLocatorFrom} from "../L2Log.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract L2LogLocatorTest is Test {
     function testAccessors() external pure {

@@ -76,4 +76,18 @@ function equal(uint48x2 self, uint48x2 other) pure returns (bool) {
     return uint48x2.unwrap(self) == uint48x2.unwrap(other);
 }
 
-using {hi, lo, inc, dec, incHi, incLo, decHi, decLo, setLo, sum, clearHi, clearLo, equal as ==} for uint48x2 global;
+using {
+    hi,
+    lo,
+    inc,
+    dec,
+    incHi,
+    incLo,
+    decHi,
+    decLo,
+    setLo,
+    sum,
+    clearHi,
+    clearLo,
+    equal as ==
+} for uint48x2 global;
